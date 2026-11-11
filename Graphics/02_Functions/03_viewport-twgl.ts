@@ -63,7 +63,7 @@ function main(): void {
 
     const programInfo = twgl.createProgramInfo(gl, [vsGLSL, fsGLSL]);
 
-    const sides = 5;
+    const sides = 14;
     const centerX = 600;
     const centerY = 300;
     const radius = 200;

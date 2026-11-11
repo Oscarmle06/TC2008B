@@ -33,7 +33,7 @@ out vec4 outColor;
 
 void main() {
     outColor = v_color;
-    //outColor = vec4(0, 1, 0, 1);
+    //outColor = vec4(1, 0, 1, 0.5);
 }
 `;
 
@@ -53,8 +53,11 @@ function main_twgl(): void {
 
     // Create an object that contains the arrays with the data
     // for each of the vertices
+    // prepare objects to draw the triangle
     const arrays = generateData();
+    // Create a buffer and a vertex array object (VAO) from the arrays
     const bufferInfo = twgl.createBufferInfoFromArrays(gl, arrays);
+    // Create a vertex array object (VAO) from the buffer info
     const vao = twgl.createVAOFromBufferInfo(gl, programInfo, bufferInfo);
 
     gl.bindVertexArray(vao);
@@ -74,9 +77,21 @@ function generateData(): twgl.Arrays {
             // Two components for the coordinates in X and Y
             numComponents: 2,
             data: new Float32Array([
-                 0.0,   0.7,
-                 0.5,  -0.7,
-                -0.5,  -0.7,
+                 0.0,   0.0,
+                 0.7,  -0.7,
+                -0.5,  -0.5,
+
+                0.0,   0.0,
+                0.7, -0.7,
+                0.8, 0.8,
+
+                0.0,   0.0,
+                 -0.7,  0.7,
+                -0.5,  -0.5,
+
+                0.0,   0.0,
+                 -0.7,  0.7,
+                0.8, 0.8,
             ]),
         },
         a_color: {
@@ -90,11 +105,23 @@ function generateData(): twgl.Arrays {
                 0, 0, 1, 1,
             ]
             */
-            // To pass integer values, the type must be specified
+            // w To pass integer values, the type must be specified
             data: new Uint8Array([
                 255, 0, 0, 255,
-                0, 255, 0, 255,
-                0, 0, 255, 255,
+                255, 0, 0, 255,
+                255, 0, 0, 255,
+
+                255, 0, 0, 220,
+                255, 0, 50, 240,
+                255, 0, 50, 220,
+
+                255, 10, 0, 180,
+                255, 10, 0, 200,
+                255, 10, 0, 200,
+
+                255, 0, 0, 120,
+                255, 0, 0, 120,
+                255, 0, 0, 120,
             ]),
         },
     };
