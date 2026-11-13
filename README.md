@@ -1,4 +1,6 @@
 # TC2008B - Multi-Agents and Computer Graphics
+This Repository is a fork from the class TC2008B repository.
+Oscar Lara - A01781855 is the owner of this repository. 
 
 Repository with class material for the course TC2008B Multiagent system simulation and computer graphics
 
