@@ -109,6 +109,7 @@ function generateData(sides: number): twgl.Arrays {
         a_color: { numComponents: 4, data: colorData },
         // Three components for each triangle, the 3 vertices
         indices: { numComponents: 3, data: indexData },
+        
     };
 
     console.log(arrays);

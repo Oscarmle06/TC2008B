@@ -63,7 +63,7 @@ function main(): void {
 
     const programInfo = twgl.createProgramInfo(gl, [vsGLSL, fsGLSL]);
 
-    const sides = 5;
+    const sides = 14;
     const centerX = 600;
     const centerY = 300;
     const radius = 200;
@@ -118,7 +118,7 @@ function generateData(
     colorData.push(1);
     colorData.push(1);
     colorData.push(1);
-
+    
     const angleStep = 2 * Math.PI / sides;
 
     // Loop over the sides to create the rest of the vertices
@@ -142,6 +142,7 @@ function generateData(
         indexData.push(s + 1);
         indexData.push(((s + 2) <= sides) ? (s + 2) : 1);
     }
+
 
     const arrays: twgl.Arrays = {
         // Two components for each position in 2D
