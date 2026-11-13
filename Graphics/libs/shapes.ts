@@ -83,40 +83,80 @@ function shapeF_centered() : twgl.Arrays {
 }
 
 function smiley(radius: number) : twgl.Arrays {
-    // The arrays are initially empty
     const positionData: number[] = [];
     const colorData: number[] = [];
     const indexData: number[] = [];
 
-    // TODO: Create you own shape for a smiley face
-    //  - Add coordinates as pairs of elements into the positionData array
-    //  - Add color values as 3 values (RBG) into the colorData array
-    //  - Add index for the order in which vertices are connected, 3 values for each triangle
-    // HINT: You can use polar coordinates to define the positions of vertices,
-    // using the radius and an angle. Then convert them to polar coordinates.
+    const sides = 20;
+    const angleStep = 2 * Math.PI / sides;
 
-    // Sample data for a single yellow triangle. Replace with your values.
-    positionData.push(0, 100);
-    positionData.push(-120, -100);
-    positionData.push(120, -100);
-    colorData.push(0.9, 0.8, 0, 1);
-    colorData.push(0.9, 0.8, 0, 1);
-    colorData.push(0.9, 0.8, 0, 1);
+    // The first vertex is the center, used by each triangle in the fan.
+    positionData.push(0, 0);
+    colorData.push(1, 1, 0, 1);
 
-    indexData.push(0, 2, 1);
+    for (let s = 0; s < sides; s++) {
+        const angle = angleStep * s;
+        positionData.push(Math.cos(angle) * radius, Math.sin(angle) * radius);
+        colorData.push(1, 0.8, 0, 1);
+
+        indexData.push(0);
+        indexData.push(s + 1);
+        indexData.push((s + 1) % sides + 1);
+    }
+
+        const eyeStart1 = positionData.length / 2;
+            positionData.push(-100, 20, -65, 30, -65, 70);
+            for (let i = 0; i < 3; i++) {
+                colorData.push(0, 0, 0, 1);
+            }
+        indexData.push(eyeStart1, eyeStart1 + 1, eyeStart1 + 2);
+
+        const eyeStart2 = positionData.length / 2;
+            positionData.push(-30, 20, -65, 30, -65, 70);
+            for (let i = 0; i < 3; i++) {
+                colorData.push(0, 0, 0, 1);
+            }
+        indexData.push(eyeStart2, eyeStart2 + 1, eyeStart2 + 2);
+
+        const eyeStart3 = positionData.length / 2;
+            positionData.push(100, 20, 65, 30, 65, 70);
+            for (let i = 0; i < 3; i++) {
+                colorData.push(0, 0, 0, 1);
+            }
+        indexData.push(eyeStart3, eyeStart3 + 1, eyeStart3 + 2);
+
+        const eyeStart4 = positionData.length / 2;
+            positionData.push(30, 20, 65, 30, 65, 70);
+            for (let i = 0; i < 3; i++) {
+                colorData.push(0, 0, 0, 1);
+            }
+        indexData.push(eyeStart4, eyeStart4 + 1, eyeStart4 + 2);
+
+        // The first vertex is the center, used by each triangle in the fan.
+    const mouthStart = positionData.length / 2
+    positionData.push(0, -40);
+    colorData.push(1, 0, 0, 1);
+    let a = radius / 2;
+    let b = radius / 4;
 
 
+    for (let s = 0; s < sides; s++) {
+        const angle = angleStep * s;
+        let elipseRadius = a * b / Math.sqrt(Math.pow((b * Math.cos(angle)), 2) + Math.pow((a * Math.sin(angle)), 2))
+        positionData.push(Math.cos(angle) * elipseRadius, Math.sin(angle) * elipseRadius - 70);
+        colorData.push(0, 0, 0, 1);
+
+        indexData.push(mouthStart);
+        indexData.push(mouthStart + s + 1);
+        indexData.push(mouthStart + (s + 1) % sides + 1);
+    }
 
 
-
-    // Build the final object with the arrays for positions, colors, and indices
     const arrays: twgl.Arrays = {
         a_position: { numComponents: 2, data: positionData },
-        a_color:    { numComponents: 4, data: colorData },
-        indices:    { numComponents: 3, data: indexData },
+        a_color: { numComponents: 4, data: colorData },
+        indices: { numComponents: 3, data: indexData },
     };
-
-    console.log(arrays);
 
     return arrays;
 }
